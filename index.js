@@ -32,11 +32,16 @@ if (cluster.isMaster) {
   const port = process.env.PORT || 5000;
   dotenv.config();
 
+  // Load config files
+  const salesforce = require('./config/jsforce');
+
   const app = express()
 
   // Load routes
-  const contracts = require('./routes/contracts')
-  const nps = require('./routes/nps')
+  const contracts = require('./scheduler/contracts')
+  const nps = require('./scheduler/nps')
+  const query = require('./routes/query')
+
 
   //Middleware
   app.use(cors())
@@ -48,9 +53,13 @@ if (cluster.isMaster) {
     saveUninitialized: true,
   }));
 
+  // Load scheduler
+  app.get('/1', (req, res) => res.send(nps.cons))
+  app.get('/2', (req, res) => res.send(contracts.cons))
+
   // Use Routes
-  app.use('/contracts', contracts)
-  app.use('/nps', nps)
+  // app.use('/contracts', contracts)
+  app.use('/query', query)
 
   // Handle production
   if (process.env.NODE_ENV === 'production') {
@@ -67,5 +76,6 @@ if (cluster.isMaster) {
   }
   app.listen(port, () => {
     console.log(`Server started on port ${port}`);
+    salesforce.login()
   })
 }
