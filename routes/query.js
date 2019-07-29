@@ -8,7 +8,7 @@ const updateFields = (record) => {
   // 2. Update the number of records attempt on SF
   org.sobject("Contact").update({
     Id: record.Id,
-    Contract_Attempts__c: Number(record.Contract_Attempts__c) + 1
+    Sent_Contract__c: Date.now()
   }, (err, ret) => {
       if (err || !ret.success) { return console.error(err, ret); }
       console.log('Updated Successfully : ' + ret.id);
@@ -23,6 +23,8 @@ router.post('/', async (req, res) => {
   await org.query(q, (err, result) => {
     if(!err && result.records) {
       for (let record of result.records) {
+        console.log(record);
+        
         updateFields(record)
       } 
       res.status(201).send(result.records) 
