@@ -5,8 +5,7 @@ const scheduler = require('../scheduler/schedule').current;
 const NpsJob = require('../jobs/npsJob')
 
 router.post('/', async (req, res) => {
-  console.log("starting a npsjob on demand..");
-  new NpsJob(scheduler, "npsjobs_ondemand").executeAsync()
+  scheduler.run(new NpsJob("npsjobs_ondemand"));
   res.status(201).end(); 
 })
 

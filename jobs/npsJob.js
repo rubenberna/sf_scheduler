@@ -2,8 +2,8 @@ const session = require('express-session');
 const Job = require('./Job');
 
 // 1. Get all records who's next nps date is today
- // const q = 'SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE (Next_NPS_date__c = TOMORROW AND Email != null)'
- const q = "SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE Email = 'davi.verstraeten@gmail.com'"
+// const q = 'SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE (Next_NPS_date__c = TOMORROW AND Email != null)'
+const q = "SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE Email = 'davi.verstraeten@gmail.com'"
  
 class NpsJob extends Job {
 

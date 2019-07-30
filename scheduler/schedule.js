@@ -5,42 +5,36 @@ const NpsJob = require('../jobs/npsJob');
 const SchedulerState = { Started:"Started", Stopped:"Stopped" }
 
 class Scheduler {
-    constructor(){ 
-        this.log = [];
-        this.jobs = [];
-        this.status = SchedulerState.Stopped;
-    }
+  constructor(){  
+    this.log = []; this.jobs = []; this.status = SchedulerState.Stopped; 
+  }
 
-    async start(){
-        if (this.status == SchedulerState.Started) return ; 
-        this.addLog("starting the scheduler");
-        this.jobs.push(schedule.scheduleJob('* * * * *', () => { 
-            this.addLog("starting a scheduled contractsjob..");
-            new ContractJob(this, "contractsjob_scheduled").execute()
-        }))
-        this.jobs.push(schedule.scheduleJob('* * * * *', () => { 
-            this.addLog("starting a scheduled npsjob..");
-            new NpsJob(this, "nps_scheduled").execute()
-        }))
-        this.status = SchedulerState.Started;
-    }
+  start(){
+    if (this.status == SchedulerState.Started) return ; 
+    this.addLog("starting the scheduler");
+    this.jobs.push(schedule.scheduleJob('* * * * *', () => { new ContractJob("contractsjob_scheduled").execute(this)}))
+    this.jobs.push(schedule.scheduleJob('* * * * *', () => { new NpsJob("nps_scheduled").execute(this) }))
+    this.status = SchedulerState.Started;
+  }
 
-    cancelJobs(){
-        if (this.status == SchedulerState.Stopped) return ; 
-        this.addLog("cancelling all scheduled jobs..");
-        this.jobs.forEach(j => j.cancel())
-        this.jobs = [];
-        this.status = SchedulerState.Stopped;
-    }
+  cancelJobs(){
+    if (this.status == SchedulerState.Stopped) return ; 
+    this.addLog("cancelling all scheduled jobs..");
+    this.jobs.forEach(j => j.cancel())
+    this.jobs = [];
+    this.status = SchedulerState.Stopped;
+  }
 
-    addLog(line, logtoconsole = true){
-        this.log.push(line);
-        if (logtoconsole) console.log(line); 
-    }
+  addLog(line, logtoconsole = true){
+    this.log.push(line);
+    if (logtoconsole) console.log(line); 
+  }
+
+  run(job){  job.executeAsync(this); }
 }
 
+// use a singleton...
 let scheduler = new Scheduler(); 
-
 module.exports = { 
     current: scheduler
 } 
