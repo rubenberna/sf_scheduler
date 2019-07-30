@@ -1,0 +1,20 @@
+.vertical-menu {
+  width: 17%;
+  background: #1F2D33;
+
+  .ui.vertical.menu {
+    width: 100%;
+    background: #1F2D33;
+
+    .item {
+      color: white !important;
+    }
+  }
+  .ui.menu .active.item:hover, .ui.vertical.menu .active.item:hover {
+    background: #757575;
+  }
+  .ui.menu .active.item, .ui.vertical.menu .active.item {
+    background: #757575;
+  }
+}
+

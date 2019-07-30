@@ -1,0 +1,31 @@
+.navbar {
+  height: 10vh;
+  display: flex;
+  width: 100vw;
+  background: #148CBF;
+
+  .navbar-title {
+    width: 17%;
+    background: #137EAC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .ui.large.header {
+      color: white;
+    }
+  }
+
+  .navbar-menu {
+    display: flex;
+    align-items: flex-end;
+
+    .ui.secondary.pointing.menu .item {
+      color: white;
+    }
+    .ui.secondary.pointing.menu .active.item {
+      border-color: white;
+    }
+  }
+}
