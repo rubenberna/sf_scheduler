@@ -24,7 +24,6 @@ router.post('/', async (req, res) => {
     if(!err && result.records) {
       for (let record of result.records) {
         console.log(record);
-        
         updateFields(record)
       } 
       res.status(201).send(result.records) 

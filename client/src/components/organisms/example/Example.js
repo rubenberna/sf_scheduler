@@ -4,8 +4,13 @@ import './example.scss'
 import HeaderDefault from '../../atoms/Header'
 import ButtonDefault from '../../atoms/Button'
 import { contractQuery, npsQuery } from '../../../modules/queries'
+import firebase from '../../../firebase/firebaseInit'
 
 class Example extends Component {
+  state = {
+    contractsData: [],
+    npsData: []
+  }
 
   handleClickOne = async () => {
     const records = await contractQuery()
@@ -16,6 +21,26 @@ class Example extends Component {
     const records = await npsQuery()
     console.log(records);
   }
+
+  componentDidMount() {
+    this.fetchContractsData()
+    this.fetchNpsData()
+  }
+
+  fetchContractsData = async () => {
+    const snapshot = await firebase.contracts.get()
+    let emails = []
+    await snapshot.docs.map(doc => emails.push(doc.data()))
+    this.setState({ contractsData: emails })
+  }
+
+  fetchNpsData = async () => {
+    const snapshot = await firebase.nps.get()
+    let emails = []
+    await snapshot.docs.map(doc => emails.push(doc.data()))
+    this.setState({ npsData: emails })
+  }
+
 
   render() {
     return (
