@@ -4,7 +4,7 @@ import './example.scss'
 import HeaderDefault from '../../atoms/Header'
 import ButtonDefault from '../../atoms/Button'
 import { contractQuery, npsQuery } from '../../../modules/queries'
-import firebase from '../../../firebase/firebaseInit'
+import db from '../../../firebase/db'
 
 class Example extends Component {
   state = {
@@ -12,35 +12,50 @@ class Example extends Component {
     npsData: []
   }
 
-  handleClickOne = async () => {
-    const records = await contractQuery()
-    console.log(records);
+  filterEmails = (records) => {
+    let emails = []
+    for (let record of records) {
+      emails.push(record.Email)
+    }
+    return emails
   }
 
-  handleClickTwo = async () => {
+  handleClickContracts = async () => {
+    const records = await contractQuery()
+    const emails = await this.filterEmails(records)
+    const data = {
+      date: Date.now(),
+      nr_processed: records.length,
+      emails
+    }
+    db.addContractsData(data)
+  }
+
+  handleClickNps = async () => {
     const records = await npsQuery()
-    console.log(records);
+    const emails = await this.filterEmails(records)
+    const data = {
+      date: Date.now(),
+      nr_processed: records.length,
+      emails
+    }
+    db.addNpsData(data)
   }
 
   componentDidMount() {
-    this.fetchContractsData()
-    this.fetchNpsData()
+    this.getContracts()
+    this.getNps()
   }
 
-  fetchContractsData = async () => {
-    const snapshot = await firebase.contracts.get()
-    let emails = []
-    await snapshot.docs.map(doc => emails.push(doc.data()))
+  getContracts = async () => {
+    const emails = await db.fetchContractsData()
     this.setState({ contractsData: emails })
   }
 
-  fetchNpsData = async () => {
-    const snapshot = await firebase.nps.get()
-    let emails = []
-    await snapshot.docs.map(doc => emails.push(doc.data()))
+  getNps = async () => {
+    const emails = await db.fetchNpsData()
     this.setState({ npsData: emails })
   }
-
 
   render() {
     return (
@@ -49,12 +64,12 @@ class Example extends Component {
           Let's test this app
         </HeaderDefault>
         <ButtonDefault 
-          onClick={e => this.handleClickOne()}>
+          onClick={e => this.handleClickContracts()}>
           Run contracts
         </ButtonDefault>
         <ButtonDefault 
           color={'green'}
-          onClick={e => this.handleClickTwo()}>
+          onClick={e => this.handleClickNps()}>
           Run NPS
         </ButtonDefault>
       </div>

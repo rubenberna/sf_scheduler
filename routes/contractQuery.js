@@ -18,7 +18,9 @@ const updateFields = (record) => {
 // 1. Get all records who didn't sign and the next contact date is today
 router.post('/', async (req, res) => {
   const org = session.org
-  const q = 'SELECT Id, Name, Contract_Attempts__c FROM Contact WHERE (Next_contract_attempt_date__c = TODAY AND Signed_Contract__c = FALSE)'
+  // const q = 'SELECT Id, Name, Contract_Attempts__c FROM Contact WHERE (Next_contract_attempt_date__c = TODAY AND Signed_Contract__c = FALSE)'
+
+  const q = "SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE Email = 'davi.verstraeten@gmail.com'"
 
   await org.query(q, (err, result) => {
     if(!err && result.records) {
