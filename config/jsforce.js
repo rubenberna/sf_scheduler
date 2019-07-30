@@ -7,14 +7,17 @@ const org = new jsforce.Connection()
 module.exports = {
   // Connect to Salesforce
   login: () => {
-    org.login(process.env.SF_USERNAME, process.env.SF_PASSWORD + process.env.SF_SECURITY_TOKEN, function (err, userInfo) {
+    return new Promise((res, rej) => {
+      org.login(process.env.SF_USERNAME, process.env.SF_PASSWORD + process.env.SF_SECURITY_TOKEN, function (err, userInfo) {
       try {
+        // add result to the session for api access...
         session.org = org;
         session.token = org.accessToken;
-        return console.log('Access Token: ' + org.accessToken);
+        res(org)
       } catch (e) {
-        console.log(e);
+        rej(e)
       }
+      })
     })
   }
 }
