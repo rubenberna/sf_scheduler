@@ -40,7 +40,9 @@ if (cluster.isMaster) {
   // Load routes
   const contracts = require('./scheduler/contracts')
   const nps = require('./scheduler/nps')
-  const query = require('./routes/query')
+
+  const contractQuery = require('./routes/contractQuery')
+  const npsQuery = require('./routes/npsQuery')
 
 
   //Middleware
@@ -58,8 +60,8 @@ if (cluster.isMaster) {
   app.get('/2', (req, res) => res.send(contracts.cons))
 
   // Use Routes
-  // app.use('/contracts', contracts)
-  app.use('/query', query)
+  app.use('/contract_query', contractQuery)
+  app.use('/nps_query', npsQuery)
 
   // Handle production
   if (process.env.NODE_ENV === 'production') {

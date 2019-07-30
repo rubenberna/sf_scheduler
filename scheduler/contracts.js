@@ -2,7 +2,8 @@ const schedule = require('node-schedule');
 
 let crons = []
 
-const j = schedule.scheduleJob('* * * * *', function () {
+// "At 04:05 of every day"
+const j = schedule.scheduleJob('5 4 * * *', function () {
   crons.push('test')
 });
 

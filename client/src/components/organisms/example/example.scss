@@ -4,4 +4,12 @@
   align-items: center;
   flex-direction: column;
   height: 80vh;
+
+  .ui.large.header {
+    margin-bottom: 16px;
+  }
+
+  button {
+    margin: 8px !important;
+  }
 }

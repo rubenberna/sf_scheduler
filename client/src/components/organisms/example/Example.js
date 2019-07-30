@@ -3,12 +3,17 @@ import React, { Component } from 'react';
 import './example.scss'
 import HeaderDefault from '../../atoms/Header'
 import ButtonDefault from '../../atoms/Button'
-import { query } from '../../../modules/query'
+import { contractQuery, npsQuery } from '../../../modules/queries'
 
 class Example extends Component {
 
-  handleClick = async () => {
-    const records = await query()
+  handleClickOne = async () => {
+    const records = await contractQuery()
+    console.log(records);
+  }
+
+  handleClickTwo = async () => {
+    const records = await npsQuery()
     console.log(records);
   }
 
@@ -19,9 +24,13 @@ class Example extends Component {
           Let's test this app
         </HeaderDefault>
         <ButtonDefault 
-          class={'ui margin top'}
-          onClick={e => this.handleClick()}>
-          Search
+          onClick={e => this.handleClickOne()}>
+          Run contracts
+        </ButtonDefault>
+        <ButtonDefault 
+          color={'green'}
+          onClick={e => this.handleClickTwo()}>
+          Run NPS
         </ButtonDefault>
       </div>
     )
