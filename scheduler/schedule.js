@@ -6,7 +6,9 @@ const SchedulerState = { Started:"Started", Stopped:"Stopped" }
 
 class Scheduler {
   constructor(){  
-    this.log = []; this.jobs = []; this.status = SchedulerState.Stopped; 
+    this.log = []; 
+    this.jobs = []; 
+    this.status = SchedulerState.Stopped; 
   }
 
   start(){
