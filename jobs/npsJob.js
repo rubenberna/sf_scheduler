@@ -1,15 +1,21 @@
 const session = require('express-session');
 const Job = require('./Job');
+const delighted = require('../config/delighted')
 
 // 1. Get all records who's next nps date is today
-// const q = 'SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE (Next_NPS_date__c = TOMORROW AND Email != null)'
-const q = "SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE Email = 'davi.verstraeten@gmail.com'"
+const q = "SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE (Next_NPS_date__c = TODAY AND Email != null) AND (Status__c = 'Geboekt' OR Status__c = 'On Hold' OR Status__c = 'Open')"
+
+
+// const q = "SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE Email = 'davi.verstraeten@gmail.com'"
  
 class NpsJob extends Job {
 
   getQuery() { return q; };
     
   processRecord(record){
+    let nextDate = new Date()
+    nextDate.setDate(nextDate.getDate() + 42)
+
     session.org.sobject("Contact").update({
       Id: record.Id,
       Next_NPS_date__c: nextDate,
