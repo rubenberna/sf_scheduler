@@ -6,7 +6,11 @@ import './menu.scss'
 class VerticalMenu extends Component {
   state = { activeItem: 'Contracts' }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name })
+    const tab = { 'verticalMenu': name }
+    this.props.changeTabs(tab)
+  }
 
   render() {
     const { activeItem } = this.state

@@ -14,8 +14,10 @@ class Scheduler {
   start(){
     if (this.status == SchedulerState.Started) return ; 
     this.addLog("starting the scheduler");
-    this.jobs.push(schedule.scheduleJob('* * * * *', () => { new ContractJob("contractsjob_scheduled").execute(this)}))
-    this.jobs.push(schedule.scheduleJob('* * * * *', () => { new NpsJob("nps_scheduled").execute(this) }))
+    // "At 04:05 of every day"
+    this.jobs.push(schedule.scheduleJob('5 4 * * *', () => { new ContractJob("contractsjob_scheduled").execute(this)}))
+    // "At 05:05 of every day"
+    this.jobs.push(schedule.scheduleJob('5 5 * * *', () => { new NpsJob("nps_scheduled").execute(this) }))
     this.status = SchedulerState.Started;
   }
 

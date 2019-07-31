@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import './example.scss'
+import './mainBoard.scss'
 import HeaderDefault from '../../atoms/Header'
 import ButtonDefault from '../../atoms/Button'
-import { contractQuery, npsQuery } from '../../../modules/queries'
+import { contractQuery, npsQuery, fetchContractsData, fetchNpsData } from '../../../modules/queries'
 
-class Example extends Component {
+class MainBoard extends Component {
   state = {
     contractsData: [],
     npsData: []
@@ -19,24 +19,24 @@ class Example extends Component {
     npsQuery()
   }
 
-  // componentDidMount() {
-  //   this.getContracts()
-  //   this.getNps()
-  // }
+  componentDidMount() {
+    this.getContracts()
+    this.getNps()
+  }
 
-  // getContracts = async () => {
-  //   const emails = await db.fetchContractsData()
-  //   this.setState({ contractsData: emails })
-  // }
+  getContracts = async () => {
+    const records = await fetchContractsData()
+    this.setState({ contractsData: records})
+  }
 
-  // getNps = async () => {
-  //   const emails = await db.fetchNpsData()
-  //   this.setState({ npsData: emails })
-  // }
+  getNps = async () => {
+    const records = await fetchNpsData()
+    this.setState({ npsData: records})
+  }
 
   render() {
     return (
-      <div className="example">
+      <div className="main-board">
         <HeaderDefault size={'large'}>
           Let's test this app
         </HeaderDefault>
@@ -54,4 +54,4 @@ class Example extends Component {
   }
 }
 
-export default Example
+export default MainBoard

@@ -4,7 +4,7 @@ import './navbar.scss'
 import HeaderDefault from '../../atoms/Header'
 import HorizontalMenu from '../menus/HorizontalMenu'
 
-const Navbar = () => {
+const Navbar = (props) => {
   return(
     <div className="navbar">
       <div className="navbar-title">
@@ -13,7 +13,7 @@ const Navbar = () => {
         </HeaderDefault>
       </div>
       <div className="navbar-menu">
-        <HorizontalMenu/>
+        <HorizontalMenu changeTabs={props.changeTabs}/>
       </div>
     </div>
   )

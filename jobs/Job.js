@@ -26,7 +26,7 @@ class Job {
       if(!err && result.records) { 
         const emails = this.filterEmails(result.records)
         const data = {
-          date: Date.now(),
+          date: new Date(),
           nr_processed: result.records.length,
           emails
         }

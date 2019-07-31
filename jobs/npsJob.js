@@ -6,7 +6,6 @@ const db = require('../config/firebase/db')
 // 1. Get all records who's next nps date is today
 const q = "SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE (Next_NPS_date__c = TOMORROW AND Email != null) AND (Status__c = 'Geboekt' OR Status__c = 'On Hold' OR Status__c = 'Open')"
 
-
 // const q = "SELECT Id, Name, Email, Next_NPS_date__c, Status__c, NPS_emails_sent__c FROM Contact WHERE Email = 'davi.verstraeten@gmail.com'"
 
 class NpsJob extends Job {

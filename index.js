@@ -13,8 +13,10 @@ dotenv.config();
 const salesforce = require('./config/jsforce');
 const app = express()
 
+// Load routes
 const contractQuery = require('./routes/contractQuery')
 const npsQuery = require('./routes/npsQuery')
+const dbQuery = require('./routes/dbQuery')
 
 //Middleware
 app.use(cors())
@@ -35,6 +37,7 @@ app.get('/start', (req, res) => { scheduler.start(); return res.status(200).end(
 // Use Routes
 app.use('/contract_query', contractQuery)
 app.use('/nps_query', npsQuery)
+app.use('/db_query', dbQuery)
 
 // Handle production
 if (process.env.NODE_ENV === 'production') {

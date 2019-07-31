@@ -4,11 +4,15 @@ import { Menu } from 'semantic-ui-react'
 class HorizontalMenu extends Component {
   state = { activeItem: 'Get Data' }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name })
+    const tab = { 'horizontalMenu': name }
+    this.props.changeTabs(tab)
+  }
 
   render() {
     const { activeItem } = this.state
-
+    
     return (
       <div>
         <Menu pointing secondary>
