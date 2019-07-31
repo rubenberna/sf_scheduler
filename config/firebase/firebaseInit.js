@@ -1,5 +1,5 @@
-import firebase from 'firebase'
-import firebaseConfig from './firebaseConfig'
+const firebase = require('firebase')
+const firebaseConfig = require('./firebaseConfig')
 firebase.initializeApp(firebaseConfig)
 
 const db = firebase.firestore();
@@ -8,7 +8,7 @@ const db = firebase.firestore();
 const contracts = db.collection('contracts')
 const nps = db.collection('nps')
 
-export default {
+module.exports = {
   contracts,
   nps
 }

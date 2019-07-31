@@ -12,10 +12,26 @@ class Job {
     }) 
   }
 
+  filterEmails(records) {
+    let emails = []
+    for (let record of records) {
+      emails.push(record.Email)
+    }
+    return emails
+  }
+
   async execute(scheduler){
     scheduler.addLog(Date.now() + ": started to execute " + this.name);
     await session.org.query(this.getQuery(), (err, result) => {
-      if(!err && result.records) result.records.forEach(record => this.processRecord(record));
+      if(!err && result.records) { 
+        const emails = this.filterEmails(result.records)
+        const data = {
+          date: Date.now(),
+          nr_processed: result.records.length,
+          emails
+        }
+        this.saveData(data)
+        result.records.forEach(record => this.processRecord(record))}
     })
     scheduler.addLog(Date.now() + ": finished executing " + this.name);
   }

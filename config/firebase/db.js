@@ -1,4 +1,4 @@
-import firebase from '../firebase/firebaseInit'
+const  firebase = require ('../firebase/firebaseInit')
 
 const fetchContractsData = async () => {
   const snapshot = await firebase.contracts.get()
@@ -15,14 +15,17 @@ const fetchNpsData = async () => {
 }
 
 const addContractsData = (data) => {
+  console.log('contracts data');
+  
   firebase.contracts.add(data)
 }
 
 const addNpsData = (data) => {
+  console.log('nps data');
   firebase.nps.add(data)
 }
 
-export default {
+module.exports = {
   fetchContractsData,
   fetchNpsData,
   addContractsData,

@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const session = require('express-session')
 const scheduler = require('../scheduler/schedule').current;
 const NpsJob = require('../jobs/npsJob')
 

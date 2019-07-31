@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   apiKey: `${process.env.REACT_APP_FIREBASE_KEY}`,
   authDomain: "sfscheduler-db62e.firebaseapp.com",
   databaseURL: "https://sfscheduler-db62e.firebaseio.com",

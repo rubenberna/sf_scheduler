@@ -1,5 +1,6 @@
 const session = require('express-session');
 const Job = require('./Job');
+const db = require('../config/firebase/db')
 
 // const q = 'SELECT Id, Name, Contract_Attempts__c FROM Contact WHERE (Next_contract_attempt_date__c = TODAY AND Signed_Contract__c = FALSE)'
 const q = "SELECT Id, Name, Email, Contract_Attempts__c, Reminders__c FROM Contact WHERE Email = 'davi.verstraeten@gmail.com'"
@@ -7,6 +8,10 @@ const q = "SELECT Id, Name, Email, Contract_Attempts__c, Reminders__c FROM Conta
 class ContractJob extends Job {
 
   getQuery() { return q; };
+
+  saveData(data) {
+    db.addContractsData(data)
+  }
     
   processRecord(record){
     session.org.sobject("Contact").update({
