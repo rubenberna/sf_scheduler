@@ -1,9 +1,7 @@
 const  firebase = require ('../firebase/firebaseInit')
 
 const fetchContractsData = async () => {
-  let yesterday = new Date()
-  yesterday.setDate(yesterday.getDate() - 1 )
-  const snapshot = await firebase.contracts.where('date', '==', yesterday).get()
+  const snapshot = await firebase.contracts.get()
   return snapshot.docs.map(doc => doc.data())
 }
 

@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 
 import './mainBoard.scss'
-import HeaderDefault from '../../atoms/Header'
-import ButtonDefault from '../../atoms/Button'
+import TriggerEvents from '../../molecules/triggerEvents/TriggerEvents'
 import { contractQuery, npsQuery, fetchContractsData, fetchNpsData } from '../../../modules/queries'
 
 class MainBoard extends Component {
   state = {
     contractsData: [],
     npsData: []
-  }
-
-  handleClickContracts = () => {
-    contractQuery()
-  }
-
-  handleClickNps = () => {
-    npsQuery()
   }
 
   componentDidMount() {
@@ -34,21 +25,34 @@ class MainBoard extends Component {
     this.setState({ npsData: records})
   }
 
+  renderContent = () => {
+    const { horizontalMenu, verticalMenu } = this.props.tabs
+    if (horizontalMenu === 'Trigger Event' && verticalMenu === 'Contracts') {
+      return (
+        <>
+          <TriggerEvents 
+            headerMsg={'Contracts on demand'} 
+            btnMsg={'Run process'} 
+            runQuery={ contractQuery }/>
+        </>
+      )
+    }
+    if (horizontalMenu === 'Trigger Event' && verticalMenu === 'NPS') {
+      return (
+        <>
+          <TriggerEvents
+            headerMsg={'NPS on demand'}
+            btnMsg={'Run process'}
+            runQuery={ npsQuery } />
+        </>
+      )
+    } 
+  }
+
   render() {
     return (
       <div className="main-board">
-        <HeaderDefault size={'large'}>
-          Let's test this app
-        </HeaderDefault>
-        <ButtonDefault 
-          onClick={e => this.handleClickContracts()}>
-          Run contracts
-        </ButtonDefault>
-        <ButtonDefault 
-          color={'green'}
-          onClick={e => this.handleClickNps()}>
-          Run NPS
-        </ButtonDefault>
+        {this.renderContent()}
       </div>
     )
   }

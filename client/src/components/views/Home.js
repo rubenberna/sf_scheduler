@@ -21,7 +21,7 @@ class Home extends Component {
         <Navbar changeTabs={this.changeTabs}/>
         <div className='home-container'>
           <VerticalMenu changeTabs={this.changeTabs} />
-          <MainBoard />
+          <MainBoard tabs={this.state} />
         </div>
       </div>
     )
