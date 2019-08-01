@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 import './mainBoard.scss'
-import TriggerEvents from '../../molecules/triggerEvents/TriggerEvents'
+import TriggerEvents from '../triggerEvents/TriggerEvents'
 import { contractQuery, npsQuery, fetchContractsData, fetchNpsData } from '../../../modules/queries'
+import schedules from '../../../modules/schedules'
 
 class MainBoard extends Component {
   state = {
@@ -32,7 +33,8 @@ class MainBoard extends Component {
         <>
           <TriggerEvents 
             headerMsg={'Contracts on demand'} 
-            btnMsg={'Run process'} 
+            btnMsg={'Run process'}
+            schedules={schedules.contracts} 
             runQuery={ contractQuery }/>
         </>
       )
@@ -43,6 +45,7 @@ class MainBoard extends Component {
           <TriggerEvents
             headerMsg={'NPS on demand'}
             btnMsg={'Run process'}
+            schedules={schedules.nps} 
             runQuery={ npsQuery } />
         </>
       )
