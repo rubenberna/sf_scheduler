@@ -3,7 +3,7 @@ import moment from 'moment'
 const getYesterday = (data) => {
   
   let array = []
-  const yesterday = moment().subtract(2, 'days').format("MMM Do YY"); 
+  const yesterday = moment().subtract(1, 'days').format("MMM Do YY"); 
   data.forEach(element => {   
     if (moment(element.date).format("MMM Do YY") === yesterday) {
       // console.log('yesterday', element);    
@@ -27,7 +27,7 @@ const getLastWeek = (data) => {
 
 const getThisMonth = (data) => {
   // console.log(data);
-  const thisMonth = moment().month("July").format('M YY')
+  const thisMonth = moment().format('M YY')
   let array = []
   data.forEach(element => {
     if (moment(element.date).format('M YY') === thisMonth) {  
