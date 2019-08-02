@@ -2,20 +2,17 @@ import React, { Component } from 'react';
 import CountUp from 'react-countup';
 
 import HeaderDefault from '../../atoms/Header'
+import Excel from '../../../modules/Excel'
 
 class DatesResults extends Component {
 
-  add = (a, b) => a + b
-
   sumProcessed = () => {
     const { elements } = this.props
-    let nums = []
     if (elements) {
-      this.props.elements.forEach(element => {
-        nums.push(element.nr_processed)
-      });
-      const sum = nums.reduce((a, b) => a + b, 0)
-      return <CountUp end={sum}/> 
+      let total = elements.reduce( (prev, curr) => {
+        return prev + curr.nr_processed
+      }, 0)
+      return <CountUp end={total}/> 
     } else return 0
   }
 
@@ -25,6 +22,7 @@ class DatesResults extends Component {
         <HeaderDefault size={'small'}>
           Processed records: {this.sumProcessed()}
         </HeaderDefault>
+        <Excel records={ this.props.elements }/>
       </>
     )
   }  
