@@ -39,19 +39,7 @@ app.use('/contract_query', contractQuery)
 app.use('/nps_query', npsQuery)
 app.use('/db_query', dbQuery)
 
-// Handle production
-if (process.env.NODE_ENV === 'production') {
-  app.use(favicon(__dirname + '/build/favicon.ico'));
-  // Static folder
-  app.use(express.static(__dirname));
-  // Handle SPA
-  app.use(express.static(path.join(__dirname, 'build')));
-
-  app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
-  require('dotenv').load();
-}
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.listen(port, async () => {
   console.log(`Server started on port ${port}`);
