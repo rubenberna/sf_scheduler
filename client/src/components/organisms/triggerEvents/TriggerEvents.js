@@ -5,6 +5,7 @@ import './triggerEvents.scss'
 import HeaderDefault from '../../atoms/Header'
 import ButtonDefault from '../../atoms/Button'
 import SegmentDefault from '../../atoms/Segment'
+import IconDefault from '../../atoms/Icon'
 
 class TriggerEvents extends Component {
 
@@ -14,8 +15,7 @@ class TriggerEvents extends Component {
   }
 
   showTimer = () => {
-    const schedules  = this.props.schedules()
-    
+    const schedules  = this.props.schedules() 
     let currTime = moment()
     let nextScheduleToday = []
     schedules.forEach(schedule => {
@@ -40,17 +40,21 @@ class TriggerEvents extends Component {
     const { headerMsg, btnMsg, runQuery } = this.props
     return (
       <div className='trigger-events'>
-        <SegmentDefault >
+        <HeaderDefault size={'medium'}>
           {`Next process: ${this.showTimer()} `}
-        </SegmentDefault>
+        </HeaderDefault>
         <div className='trigger-events-board'>
-          <HeaderDefault size={'large'}>
+        <SegmentDefault placeholder={true} size={'large'}>
+          <HeaderDefault icon={true}>
+            <IconDefault name={'pdf file outline'}/>
             {headerMsg}
           </HeaderDefault>
-          <ButtonDefault
+          <ButtonDefault 
+            primary={true}
             onClick={e => runQuery()}>
             {btnMsg}
           </ButtonDefault>
+        </SegmentDefault>
         </div>
       </div>
     )

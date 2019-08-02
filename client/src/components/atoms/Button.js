@@ -8,7 +8,8 @@ const ButtonDefault = (props) => (
     color={props.color}
     floated={props.floated}
     loading={props.loading}
-    size={props.size}>
+    size={props.size}
+    primary={props.primary}>
       {props.children}
     </Button>
 )

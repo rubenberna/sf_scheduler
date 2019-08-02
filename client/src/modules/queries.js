@@ -11,7 +11,7 @@ export const npsQuery = async () => {
 }
 
 export const fetchContractsData = async () => {
-  let res = await axios.get('/db_query/contracts')
+  let res = await axios.get('/db_query/contracts')  
   return res.data
 }
 

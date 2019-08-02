@@ -8,7 +8,7 @@ router.get('/contracts', async (req, res) => {
 })
 
 router.get('/nps', async (req, res) => {
-  const records = await db.fetchNpsData()
+  const records = await db.fetchNpsData()  
   res.status(201).send(records)
 })
 

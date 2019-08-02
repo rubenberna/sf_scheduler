@@ -7,7 +7,8 @@ const HeaderDefault = (props) => (
       size={props.size}
       textAlign={props.textAlign}
       float={props.float}
-      color={props.color}>
+      color={props.color}
+      icon={props.icon}>
       {props.children}
     </Header>
   </div>
