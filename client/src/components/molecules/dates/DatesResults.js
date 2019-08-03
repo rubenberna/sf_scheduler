@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CountUp from 'react-countup';
 
 import HeaderDefault from '../../atoms/Header'
-import Excel from '../../../modules/Excel'
+import Excel from '../excel/Excel'
 
 class DatesResults extends Component {
 
