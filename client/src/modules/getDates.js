@@ -27,15 +27,9 @@ const getLastWeek = (data) => {
 const getThisMonth = (data) => {
   // console.log(data);
   const thisMonth = moment().format('M YY')
-  // console.log(thisMonth);
-  
   let array = []
-  data.forEach(element => {
-    console.log(moment(element.date).format('M YY'));
-    
-    if (moment(element.date).format('M YY') === thisMonth) {  
-      console.log(element);
-      
+  data.forEach(element => {    
+    if (moment(element.date).format('M YY') === thisMonth) { 
       array.push(element)
     }
   });
