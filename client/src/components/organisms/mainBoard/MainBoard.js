@@ -32,13 +32,13 @@ class MainBoard extends Component {
 
   setDates = (data) => {
     const [name] = Object.keys(data)  
-    const yesterday = getDates.getYesterday(...Object.values(data))
-    const lastWeek = getDates.getLastWeek(...Object.values(data))
+    const today = getDates.getToday(...Object.values(data))
+    const thisWeek = getDates.getThisWeek(...Object.values(data))
     const thisMonth = getDates.getThisMonth(...Object.values(data))
     
     this.setState({
-      [`${name}Yesterday`]: yesterday,
-      [`${name}LastWeek`]: lastWeek,
+      [`${name}Today`]: today,
+      [`${name}ThisWeek`]: thisWeek,
       [`${name}ThisMonth`]: thisMonth
     })
   }
@@ -60,16 +60,16 @@ class MainBoard extends Component {
     if (horizontalMenu === 'Get Data' && verticalMenu === 'Contracts')
       return (
         <GetData  
-          yesterday={this.state.contractsYesterday}  
-          lastWeek={this.state.contractsLastWeek}
+          today={this.state.contractsToday}  
+          thisWeek={this.state.contractsThisWeek}
           thisMonth={this.state.contractsThisMonth}
           />
       )
     if (horizontalMenu === 'Get Data' && verticalMenu === 'NPS')
       return (
         <GetData 
-          yesterday={this.state.npsYesterday}
-          lastWeek={this.state.npsLastWeek}
+          today={this.state.npsToday}
+          thisWeek={this.state.npsThisWeek}
           thisMonth={this.state.npsthisMonth} />
       )
   }

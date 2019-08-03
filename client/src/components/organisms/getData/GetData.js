@@ -6,16 +6,16 @@ import DatesResults from '../../molecules/dates/DatesResults'
 
 class GetData extends Component {
   state = { 
-    activeItem: 'yesterday'
+    activeItem: 'today'
    }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   renderSegment = () => {
     const { activeItem } = this.state
-    const { yesterday, lastWeek, thisMonth } = this.props 
-    if (activeItem === 'yesterday') return <DatesResults elements={yesterday} />
-    if (activeItem === 'last week') return <DatesResults elements={lastWeek} />
+    const { today, thisWeek, thisMonth } = this.props 
+    if (activeItem === 'today') return <DatesResults elements={today} />
+    if (activeItem === 'this week') return <DatesResults elements={thisWeek} />
     if (activeItem === 'this month') return <DatesResults elements={thisMonth} /> 
   }
 
@@ -25,12 +25,12 @@ class GetData extends Component {
       <div className='get-data'>
         <Menu attached='top' tabular>
           <Menu.Item 
-            name='yesterday' 
-            active={activeItem === 'yesterday'} 
+            name='today' 
+            active={activeItem === 'today'} 
             onClick={this.handleItemClick} />
           <Menu.Item
-            name='last week'
-            active={activeItem === 'last week'}
+            name='this week'
+            active={activeItem === 'this week'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
